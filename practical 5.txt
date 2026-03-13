@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Resume</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background-color: black;
+color: white;
+margin: 40px;
+}
+
+.container{
+max-width: 800px;
+margin: auto;
+}
+
+h1{
+text-align: center;
+border-bottom: 2px solid white;
+padding-bottom: 10px;
+}
+
+.section{
+margin-top: 30px;
+}
+
+.section-title{
+font-weight: bold;
+font-size: 20px;
+margin-bottom: 10px;
+color: #00BFFF;
+}
+
+p{
+line-height: 1.6;
+}
+
+ul{
+margin-left: 20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>My Resume</h1>
+
+<div class="section">
+<p><b>Name:</b> samrudh Datir</p>
+<p><b>Date of Birth:</b> 14 may 2007</p>
+<p><b>Email:</b> samrudhdatir2007@gmail.com</p>
+<p><b>Phone:</b> +91 9096540319</p>
+</div>
+
+
+<div class="section">
+<div class="section-title">Professional Summary</div>
+<p>
+Motivated and dedicated individual with strong problem-solving skills
+and interest in web development. Looking for opportunities to apply
+technical knowledge and grow professionally.
+</p>
+</div>
+
+
+<div class="section">
+<div class="section-title">Skills</div>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>JavaScript</li>
+<li>Communication Skills</li>
+<li>Teamwork</li>
+</ul>
+</div>
+
+
+<div class="section">
+<div class="section-title">Education</div>
+<p><b>Bachelor Degree:</b> sb.jain Instituate of Techonology and Managment</p>
+<p><b>Year:</b> 2021 – 2024</p>
+</div>
+
+
+<div class="section">
+<div class="section-title">Work Experience</div>
+<p><b>Company:</b> khoka Again Company</p>
+<p><b>Role:</b> Web Development Intern</p>
+<p><b>Working Span:</b> Jan 2023 – Jun 2023</p>
+</div>
+
+
+<div class="section">
+<div class="section-title">Languages</div>
+<ul>
+<li>English</li>
+<li>Hindi</li>
+</ul>
+</div>
+
+</div>
+
+</body>
+</html>
