@@ -1,0 +1,95 @@
+students = []
+subjects = ["Python", "Maths", "Physics", "Chemistry", "English"]
+total_subjects = len(subjects)
+max_marks = 100
+
+n = int(input("Enter number of students: "))
+
+# Input student details and marks
+for i in range(n):
+    print(f"\nEnter details of Student {i + 1}")
+    name = input("Enter student name: ")
+    roll_no = input("Enter roll number: ")
+
+    marks = []
+    for subject in subjects:
+        while True:
+            mark = int(input(f"Enter marks in {subject} (0-100): "))
+            if 0 <= mark <= 100:
+                marks.append(mark)
+                break
+            print("Invalid marks! Enter a value between 0 and 100.")
+
+    total = sum(marks)
+    percentage = total / total_subjects
+
+    # Calculate grade
+    if any(mark < 35 for mark in marks):
+        grade = "F"
+        result = "FAIL"
+    elif percentage >= 90:
+        grade = "A+"
+        result = "PASS"
+    elif percentage >= 80:
+        grade = "A"
+        result = "PASS"
+    elif percentage >= 70:
+        grade = "B"
+        result = "PASS"
+    elif percentage >= 60:
+        grade = "C"
+        result = "PASS"
+    elif percentage >= 50:
+        grade = "D"
+        result = "PASS"
+    elif percentage >= 35:
+        grade = "E"
+        result = "PASS"
+    else:
+        grade = "F"
+        result = "FAIL"
+
+    students.append({
+        "name": name,
+        "roll_no": roll_no,
+        "marks": marks,
+        "total": total,
+        "percentage": percentage,
+        "grade": grade,
+        "result": result
+    })
+
+# Assign ranks based on total marks
+students.sort(key=lambda s: s["total"], reverse=True)
+
+for rank, student in enumerate(students, start=1):
+    student["rank"] = rank
+
+# Display and save printable marksheets
+with open("marksheets.txt", "w") as file:
+    for student in students:
+        marksheet = f"""
+========================================
+          STUDENT MARKSHEET
+========================================
+Name       : {student['name']}
+Roll Number: {student['roll_no']}
+----------------------------------------
+Subject Marks:
+"""
+        for subject, mark in zip(subjects, student["marks"]):
+            marksheet += f"{subject:<15}: {mark}/100\n"
+
+        marksheet += f"""----------------------------------------
+Total Marks: {student['total']}/{total_subjects * max_marks}
+Percentage : {student['percentage']:.2f}%
+Grade      : {student['grade']}
+Result     : {student['result']}
+Rank       : {student['rank']}
+========================================
+
+"""
+        print(marksheet)
+        file.write(marksheet)
+
+print("All marksheets saved successfully in marksheets.txt")
