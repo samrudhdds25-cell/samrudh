@@ -1,0 +1,119 @@
+
+students = []
+
+subjects = ["Python", "Maths", "Physics", "Chemistry", "English"]
+total_subjects = len(subjects)
+max_marks = 100
+
+# Input number of students
+while True:
+    try:
+        n = int(input("Enter number of students: "))
+        if n > 0:
+            break
+        print("Please enter a number greater than 0.")
+    except ValueError:
+        print("Please enter a valid integer.")
+
+# Input student details and marks
+for i in range(n):
+    print(f"\nEnter details of Student {i + 1}")
+
+    name = input("Enter student name: ")
+    roll_no = input("Enter roll number: ")
+
+    marks = []
+
+    for subject in subjects:
+        while True:
+            try:
+                mark = int(input(f"Enter marks in {subject} (0-100): "))
+
+                if 0 <= mark <= max_marks:
+                    marks.append(mark)
+                    break
+                else:
+                    print("Invalid marks! Enter marks between 0 and 100.")
+
+            except ValueError:
+                print("Please enter a valid integer.")
+
+    total = sum(marks)
+    percentage = total / total_subjects
+
+    # Calculate grade and result
+    if any(mark < 35 for mark in marks):
+        grade = "F"
+        result = "FAIL"
+    elif percentage >= 90:
+        grade = "A+"
+        result = "PASS"
+    elif percentage >= 80:
+        grade = "A"
+        result = "PASS"
+    elif percentage >= 70:
+        grade = "B"
+        result = "PASS"
+    elif percentage >= 60:
+        grade = "C"
+        result = "PASS"
+    elif percentage >= 50:
+        grade = "D"
+        result = "PASS"
+    else:
+        grade = "E"
+        result = "PASS"
+
+    students.append({
+        "name": name,
+        "roll_no": roll_no,
+        "marks": marks,
+        "total": total,
+        "percentage": percentage,
+        "grade": grade,
+        "result": result
+    })
+
+# Assign ranks based on total marks
+students.sort(key=lambda s: s["total"], reverse=True)
+
+for rank, student in enumerate(students, start=1):
+    student["rank"] = rank
+
+# Display and prepare marksheets
+all_marksheets = []
+
+for student in students:
+    marksheet = f"""
+========================================
+          STUDENT MARKSHEET
+========================================
+Name       : {student['name']}
+Roll Number: {student['roll_no']}
+----------------------------------------
+Subject Marks:
+"""
+
+    for subject, mark in zip(subjects, student["marks"]):
+        marksheet += f"{subject:<15}: {mark}/100\n"
+
+    marksheet += f"""----------------------------------------
+Total Marks: {student['total']}/{total_subjects * max_marks}
+Percentage : {student['percentage']:.2f}%
+Grade      : {student['grade']}
+Result     : {student['result']}
+Rank       : {student['rank']}
+========================================
+"""
+
+    print(marksheet)
+    all_marksheets.append(marksheet)
+
+# Attempt to save marksheets
+try:
+    with open("/tmp/marksheets.txt", "w", encoding="utf-8") as file:
+        file.write("\n".join(all_marksheets))
+    print("Marksheets saved successfully to /tmp/marksheets.txt")
+except OSError:
+    print("File saving is not supported in this environment.")
+    print("All marksheets have been displayed above.")
